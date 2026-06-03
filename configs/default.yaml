@@ -1,0 +1,39 @@
+# RankMixer Reproduction - Default Configuration
+
+# Dataset
+data:
+  category: All_Beauty
+  data_dir: ./AmazonReviews2023
+  neg_ratio: 4          # negatives per positive
+  seq_len: 20           # recent N items for sequence feature
+  min_rating_pos: 4     # rating >= this is positive
+
+# Model
+model:
+  num_tokens: 4         # T: feature groups
+  hidden_dim: 64        # D: token hidden dimension
+  num_heads: 4          # H: mixing heads (H=T)
+  num_blocks: 3         # L: RankMixer blocks
+  ffn_expansion: 4      # FFN inner dim multiplier
+  dropout: 0.1
+
+  # Embedding dimensions
+  user_emb_dim: 32
+  item_emb_dim: 32
+  category_emb_dim: 16
+
+# Training
+train:
+  seed: 42
+  epochs: 20
+  batch_size: 256
+  lr: 0.001
+  weight_decay: 0.0001
+  max_grad_norm: 5.0
+  warmup_steps: 100
+  early_stop_patience: 3
+
+# Paths
+output:
+  dir: ./outputs
+  checkpoint: ./outputs/rankmixer_best.pt
