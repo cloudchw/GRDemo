@@ -1,4 +1,6 @@
 .data
 .remember
 outputs
+__pycache__/
+*.pyc
 

@@ -6,7 +6,7 @@ Reproduce the Dense RankMixer ranking model from "RankMixer: Scaling Up Ranking 
 
 | Dimension | Decision |
 |-----------|----------|
-| Dataset | Amazon Reviews 2023 - All_Beauty (5-core: ~16K users, ~10K items, ~70K interactions) |
+| Dataset | Amazon Reviews 2023 - All_Beauty (3-core: ~16K users, ~10K items, ~70K interactions) |
 | Hardware | Windows CPU training |
 | Framework | PyTorch |
 | Task | CTR ranking (binary classification: click / no-click) |
@@ -128,7 +128,7 @@ Output Layer -> Sigmoid -> CTR prediction
 |------|--------------|
 | Loss function | BCE (Binary Cross Entropy) |
 | Optimizer | AdamW, lr=1e-3, weight_decay=1e-4 |
-| LR schedule | CosineAnnealing, warmup 500 steps |
+| LR schedule | CosineAnnealing, warmup 100 steps |
 | Batch size | 256 (CPU memory-friendly) |
 | Epochs | 20 (early stopping patience=3 on validation AUC) |
 | Negative sampling | 4 negatives per positive, re-sample each epoch |
@@ -152,8 +152,8 @@ Output Layer -> Sigmoid -> CTR prediction
 ## 7. Project Structure
 
 ```
-D:/GitHub/RankMixer/
-+-- AmazonReviews2023/              # Existing data source
+D:/GitHub/GRDemo/
++-- AmazonReviews2023/              # Downloaded data source
 +-- src/
 |   +-- data/
 |   |   +-- download.py             # Download All_Beauty data
