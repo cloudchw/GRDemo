@@ -268,7 +268,6 @@ def build_ctr_samples(
                 "user_interaction_count": encoder.encode_interaction_count(interaction_count),
                 "user_avg_rating": float(avg_rating),
                 "price": encoder.encode_price(price),
-                "time_delta": float(time_gap),
                 "item_seq": seq_indices,
                 "seq_mask": seq_mask,
                 "cross_stats": [float(co_count), float(time_gap)],

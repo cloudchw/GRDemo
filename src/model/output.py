@@ -5,7 +5,10 @@ import torch.nn as nn
 
 
 class OutputHead(nn.Module):
-    """Prediction head: Linear -> ReLU -> Dropout -> Linear -> Sigmoid."""
+    """Prediction head: Linear -> ReLU -> Dropout -> Linear.
+
+    Returns raw logits; apply sigmoid outside (or pair with BCEWithLogitsLoss).
+    """
 
     def __init__(self, input_dim: int, dropout: float = 0.1):
         super().__init__()
@@ -17,12 +20,12 @@ class OutputHead(nn.Module):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Predict CTR probability.
+        """Predict CTR logits.
 
         Args:
             x: (B, input_dim) pooled token representations
 
         Returns:
-            (B,) sigmoid probabilities
+            (B,) raw logits (apply sigmoid to get probabilities)
         """
         return self.layers(x).squeeze(-1)
